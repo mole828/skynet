@@ -1,10 +1,12 @@
 local skynet = require "skynet"
-
-local CMD = {}
-
+local CMD = {
+    start = function (source)
+        print(source)
+    end
+}
 skynet.start(function()
     skynet.dispatch("lua", function(session, source, cmd, ...)
-        local f=assert(CMD[cmd])
-        f(source,...)
+        local f = assert(CMD[cmd])
+        f(source, ...)
     end)
 end)
